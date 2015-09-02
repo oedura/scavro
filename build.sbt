@@ -15,7 +15,8 @@ resolvers += Resolver.sonatypeRepo("public")
 libraryDependencies ++= Seq(
   "org.apache.avro" % "avro" % "1.7.7",
   "org.apache.avro" % "avro-tools" % "1.7.7",
-  "org.scalatest" %% "scalatest" % "2.2.4" % "test"
+  "org.scalatest" %% "scalatest" % "2.2.4" % "test",
+  "com.eed3si9n" %% "treehugger" % "0.4.1"
 )
 
 // Publication
