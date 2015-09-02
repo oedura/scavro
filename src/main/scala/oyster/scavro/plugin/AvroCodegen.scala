@@ -8,6 +8,7 @@ import sbt._
 import scala.collection.JavaConversions._
 
 
+/** Scala wrapper for code generation from avro-tools */
 class AvroCodegen(outputDir: File, tmpDir: File, verbose: Boolean) {
   val compilerTool = new SpecificCompilerTool()
   val idlTool = new IdlTool()

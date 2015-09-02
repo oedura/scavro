@@ -1,16 +1,19 @@
 package oyster.scavro
 
-import org.apache.avro.Schema
 import org.apache.avro.specific.SpecificRecordBase
 
-trait AvroSerializeable {
-  type J <: SpecificRecordBase
-  def toJson: String = toAvro.toString
-  def toAvro: J
-}
 
-trait AvroMetadata[S, J] {
-  val avroClass: Class[J]
-  val schema: Schema
-  val fromAvro: (J) => S
+ /**
+  * [[AvroSerializeable]] is the base trait of scala classes to be serialized or deserialized through the
+  * [[AvroReader]] and [[AvroWriter]] classes.
+  */
+trait AvroSerializeable {
+  /** Type of corresponding Java serialization class. */
+  type J <: SpecificRecordBase
+
+  /** Returns an equivalent instance of the corresponding Java serialization class. */
+  def toAvro: J
+
+  /** Returns json encoding of this instance. */
+  def toJson: String = toAvro.toString
 }

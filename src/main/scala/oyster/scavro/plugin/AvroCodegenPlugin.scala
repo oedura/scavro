@@ -4,6 +4,7 @@ import sbt.Keys._
 import sbt._
 
 
+/** SBT Plugin to automate Avro code generation of Java classes */
 object AvroCodegenPlugin extends AutoPlugin {
   object autoImport {
     val avroSchemaFiles = settingKey[Seq[File]]("Avro schema files to compile")

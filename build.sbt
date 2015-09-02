@@ -8,7 +8,7 @@ version := "0.0.5-SNAPSHOT"
 
 scalaVersion := "2.10.4"
 
-publishTo := Some("Local Maven" at "file:///Users/UserName/.ivy2/local")
+publishTo := Some("Local Maven" at Path.userHome.asFile.toURI.toURL + ".ivy2/local")
 
 resolvers += Resolver.sonatypeRepo("public")
 
