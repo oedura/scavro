@@ -1,0 +1,7 @@
+protocol NumberSystemProtocol {
+  import schema "Number.avsc";
+  record NumberSystem {
+    string name;
+    array<Number> examples;
+  }
+}

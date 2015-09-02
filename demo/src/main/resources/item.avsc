@@ -1,0 +1,19 @@
+{
+  "namespace": "oyster.scavrodemo.idl",
+  "type": "record",
+  "name": "LineItem",
+  "fields": [
+    {
+      "name": "name",
+      "type": "string"
+    },
+    {
+      "name": "price",
+      "type": "float"
+    },
+    {
+      "name": "quantity",
+      "type": "int"
+    }
+  ]
+}
