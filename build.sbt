@@ -4,7 +4,7 @@ name := "scavro"
 
 organization := "oyster"
 
-version := "0.0.5"
+version := "0.0.5-SNAPSHOT"
 
 scalaVersion := "2.10.4"
 
@@ -15,5 +15,5 @@ resolvers += Resolver.sonatypeRepo("public")
 libraryDependencies ++= Seq(
   "org.apache.avro" % "avro" % "1.7.7",
   "org.apache.avro" % "avro-tools" % "1.7.7",
-  "org.scalatest" %% "scalatest" % "2.2.4" % "test",
+  "org.scalatest" %% "scalatest" % "2.2.4" % "test"
 )
