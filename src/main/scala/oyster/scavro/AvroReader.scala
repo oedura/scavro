@@ -14,10 +14,10 @@ abstract class AvroReader[S <: AvroSerializeable] {
 
   def read(file: File)(implicit m: AvroMetadata[S, J]): Seq[S] = {
     val ins: SeekableInput = new SeekableFileInput(file)
-    readFromSeekableInput(ins)
+    read(ins)
   }
 
-  def readFromSeekableInput(ins: SeekableInput)(implicit m: AvroMetadata[S, J]) = {
+  def read(ins: SeekableInput)(implicit m: AvroMetadata[S, J]) = {
     val datumReader = new SpecificDatumReader[J](m.avroClass)
     val dataFileReader = new DataFileReader[J](ins, datumReader)
 

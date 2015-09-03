@@ -8,14 +8,8 @@ import org.apache.avro.file.DataFileWriter
 import org.apache.avro.specific.{ SpecificDatumWriter, SpecificRecordBase }
 
 
-class AvroWriter[S <: AvroSerializeable](file: File) {
+class AvroWriter[S <: AvroSerializeable](outs: OutputStream) {
   def write(items: Seq[AvroSerializeable])(implicit m: AvroMetadata[S, S#J]) = {
-
-    def writeFile(): Unit = {
-      val outs = new FileOutputStream(file)
-      writeToStream(outs)
-    }
-
     def writeToStream(outs: OutputStream) = {
       val avroItems: Seq[S#J] = items.map(_.toAvro.asInstanceOf[S#J])
       val datumWriter = new SpecificDatumWriter[S#J](m.avroClass)
@@ -26,11 +20,14 @@ class AvroWriter[S <: AvroSerializeable](file: File) {
       datumFileWriter.close()
     }
 
-    writeFile()
+    writeToStream(outs)
   }
 }
 
 object AvroWriter {
-  def apply[S <: AvroSerializeable](file: File) = new AvroWriter[S](file)
-  def apply[S <: AvroSerializeable](filename: String) = new AvroWriter[S](new File(filename))
+  def apply[S <: AvroSerializeable](outs: OutputStream) = new AvroWriter[S](outs)
+  def apply[S <: AvroSerializeable](file: File) = new AvroWriter[S](new FileOutputStream(file))
+  def apply[S <: AvroSerializeable](filename: String) = {
+    new AvroWriter[S](new FileOutputStream(new File(filename)))
+  }
 }
