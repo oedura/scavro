@@ -14,15 +14,11 @@ val optionType = ScavroParam("price", new ScavroArray(ScavroDouble))
 val paramList = ScavroString("name") :: optionType :: ScavroInt("quantity") :: Nil
 println(treeToString(ScalaCodegen.buildTree("LineItem", "oyster.scavrodemo.idl.LineItem", paramList)))
 
-
-val paramList = ScavroString("name") :: ScavroDouble("price") :: ScavroInt("quantity") :: Nil
-
 */
 
 object ScalaCodegen {
 
-  /* ScavroParam */
-  case class ScavroParam(name: String, paramType: ScavroParamType) {
+  /* ScavroParam */  case class ScavroParam(name: String, paramType: ScavroParamType) {
     def scalaParam: ValDef = paramType.scalaParam(name)
     def javaGetter: Tree = paramType.javaGetter(name)
     def scalaGetter: Tree = paramType.scalaGetter(name)
@@ -38,6 +34,8 @@ object ScalaCodegen {
     def scalaGetter(name: String): Tree = REF(name)
     // Builder command: builder.setFoo(foo)
     def builderCommand(name: String): Tree = REF("builder") DOT setterName(name) APPLY scalaGetter(name)
+    // Mapper to convert java type to scala type: Foo(_) or _.toDouble
+    def javaConverter: Tree
     // Type ref: TYPE_REF(DoubleClass)
     def scalaType: Type
   }
@@ -52,31 +50,37 @@ object ScalaCodegen {
   object ScavroString extends PrimativeScavroParam { 
     val thClass = StringClass
     override def javaGetter(name: String): Tree = REF("j") DOT getterName(name) DOT "toString"
+    def javaConverter = WILDCARD DOT "toString"
     def apply(name: String) = new ScavroParam(name, this)
   }
 
   object ScavroDouble extends PrimativeScavroParam { 
     val thClass = DoubleClass 
+    def javaConverter = WILDCARD DOT "toDouble"
     def apply(name: String) = new ScavroParam(name, this)
   }
 
   object ScavroInt extends PrimativeScavroParam { 
     val thClass = IntClass 
+    def javaConverter = WILDCARD DOT "toInt"
     def apply(name: String) = new ScavroParam(name, this)
   }
 
   object ScavroBoolean extends PrimativeScavroParam { 
     val thClass = BooleanClass
+    def javaConverter = WILDCARD DOT "toBoolean"
     def apply(name: String) = new ScavroParam(name, this)
   }
 
   object ScavroFloat extends PrimativeScavroParam { 
     val thClass = FloatClass 
+    def javaConverter = WILDCARD DOT "toFloat"
     def apply(name: String) = new ScavroParam(name, this)
   }
 
   object ScavroLong extends PrimativeScavroParam {
     val thClass = LongClass
+    def javaConverter = WILDCARD DOT "toLong"
     def apply(name: String) = new ScavroParam(name, this)
   }
 
@@ -84,6 +88,7 @@ object ScalaCodegen {
   class ScavroOption(underlying: ScavroParamType) extends ScavroParamType {
     def scalaType: Type = TYPE_OPTION(underlying.scalaType)
     def scalaParam(name: String): ValDef = PARAM(name, this.scalaType)
+    def javaConverter: Tree = REF("Option") APPLY (WILDCARD) MAP (underlying.javaConverter)
     override def javaGetter(name: String): Tree = REF("Option") APPLY (REF("j") DOT getterName(name))
     override def builderCommand(name: String): Tree = (
       IF (scalaGetter(name) DOT "isDefined") 
@@ -92,19 +97,16 @@ object ScalaCodegen {
     )
   }
 
-// class UserHomeFeed(userId: Int, policyId: Int, stories: List[Story]) extends AvroSerializeable[user_home_feed] {
-//   def getAvroClass = classOf[user_home_feed]
-//   def toAvro = new user_home_feed(userId, policyId, stories.map(_.toAvro))
-// }
-
-// object UserHomeFeed {
-//   def apply(feed: user_home_feed) = new UserHomeFeed(feed.getUserId, feed.getPolicyId, feed.getStories.map(Story(_)).toList)
+  object ScavroOption {
+    def apply(name: String, underlying: ScavroParamType) = new ScavroParam(name, new ScavroOption(underlying))
+  }
 
   class ScavroArray(underlying: ScavroParamType) extends ScavroParamType {
     def scalaType: Type = TYPE_ARRAY(underlying.scalaType)
     def scalaParam(name: String): ValDef = PARAM(name, this.scalaType)
-    override def javaGetter(name: String): Tree = REF("j") DOT getterName(name) MAP (WILDCARD DOT "toDouble")
+    override def javaGetter(name: String): Tree = REF("j") DOT getterName(name) MAP (underlying.javaConverter)
     override def scalaGetter(name: String): Tree = REF(name) MAP (WILDCARD DOT "toAvro")
+    def javaConverter: Tree = WILDCARD MAP (underlying.javaConverter)
   }
 
   // Converts a scala accessor method name of the form `name` to a java accessor method name of the form `getName`
@@ -154,7 +156,7 @@ object ScalaCodegen {
             VAL("avroClass", TYPE_REF(sym.Class)) withFlags(Flags.OVERRIDE) := REF("classOf") APPLYTYPE(sym.JavaClass),
             VAL("schema") withFlags(Flags.OVERRIDE) withType("Schema") := 
               TYPE_REF(sym.JavaClass) DOT "getClassSchema" APPLY(),
-            VAL("fromAvro") withFlags(Flags.OVERRIDE) withType(sym.toAvroType) := BLOCK(
+            VAL("fromAvro") withFlags(Flags.OVERRIDE) := BLOCK(
               LAMBDA(PARAM("j", sym.JavaClass)) ==> NEW(sym.ScalaClass, javaClassAccessors: _*)
             )
           )
@@ -164,7 +166,9 @@ object ScalaCodegen {
 
     val schemaImport = IMPORT("org.apache.avro.Schema")
     val scavroImport = IMPORT("oyster.scavro", "AvroMetadata", "AvroReader", "AvroSerializeable")
+    val primitiveConverters = IMPORT("oyster.scavro.plugin.PrimitiveTypeConverters", "_")
 
-    BLOCK(schemaImport, scavroImport, lineItemClassTree, lineItemObjectTree) inPackage("oyster.scavrodemo.model")
+    BLOCK(schemaImport, scavroImport, primitiveConverters,
+      lineItemClassTree, lineItemObjectTree) inPackage("oyster.scavrodemo.model")
   }
 }
