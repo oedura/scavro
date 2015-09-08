@@ -1,3 +1,4 @@
 logLevel := Level.Warn
 
-addSbtPlugin("oyster" %% "scavro" % "0.0.5")
+resolvers += Resolver.sonatypeRepo("snapshots")
+addSbtPlugin("com.oysterbooks" % "scavro" % "0.9.0-SNAPSHOT")

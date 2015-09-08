@@ -1,4 +1,4 @@
-package oyster.scavrodemo
+package com.oysterbooks.scavrodemo
 
 import org.scalatest.FlatSpec
 

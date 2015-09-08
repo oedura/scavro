@@ -1,4 +1,4 @@
-package oyster.scavro.plugin
+package com.oysterbooks.scavro.plugin
 
 import sbt.Keys._
 import sbt._

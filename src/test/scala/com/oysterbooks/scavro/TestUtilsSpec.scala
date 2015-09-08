@@ -1,8 +1,7 @@
-package oyster.scavro
+package com.oysterbooks.scavro
 
-
+import com.oysterbooks.scavro.plugin.NullOutputStream
 import org.scalatest._
-import oyster.scavro.plugin.NullOutputStream
 import sbt.file
 
 /**

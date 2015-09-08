@@ -1,7 +1,7 @@
-package oyster.scavro
+package com.oysterbooks.scavro
 
+import com.oysterbooks.scavro.plugin.AvroCodegen
 import org.scalatest._
-import oyster.scavro.plugin.AvroCodegen
 
 import sbt._
 

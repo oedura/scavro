@@ -1,4 +1,4 @@
-package oyster.scavro
+package com.oysterbooks.scavro
 
 import org.apache.avro.Schema
 

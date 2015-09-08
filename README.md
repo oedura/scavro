@@ -12,7 +12,9 @@ to automate Avro's Java code generation and use the default
 ## Scavro Plugin
 
 The Scavro Plugin is an SBT plugin that automates calling Avro's code 
-generation.  To use, you must import the scavro library into your project's
+generation.  To use, you must import the scavro library into your project's SBT
+settings by adding 
+`addSbtPlugin("com.oysterbooks" % "scavro_2.10" % "0.9.0-SNAPSHOT")` to your
 `plugins.sbt` file.   Avro schema and protocol files can then be added to your
 `Build.scala` or `build.sbt` file.
 
@@ -77,6 +79,31 @@ val reader: AvroReader[LineItem] = AvroReader[LineItem]
 val dataRead: Seq[LineItem] = reader.read(filename)
 ```
 
+To utilize the Scavro runtime classes add the following to your `build.sbt` or
+`Build.scala` file.  This dependency is independent of the `addSbtPlugin`
+command described in the _Scavro Plugin_ section.  Use that if you want the
+compile time code generation functionality, use this if you want the runtime
+functionality, and use both if you want both.
+
+```scala
+libraryDependencies ++= Seq(
+      "com.oysterbooks" % "scavro_2.10_0.13" % "0.9.0-SNAPSHOT" from 
+        "https://oss.sonatype.org/content/repositories/snapshots/com/oysterbooks/" +
+          "scavro_2.10_0.13/0.9.0-SNAPSHOT/scavro-0.9.0-SNAPSHOT.jar")
+```
+
+
+## Contributing
+
+Contributions are welcome.  Submit pull requests to the master branch for core 
+improvements and bug fixes.  If you feel more ambitious, check out the 
+`code_generation` feature branch.
+
+The demo project is considered an integration test and must run correctly before
+pull requests will be accepted.  Run `stb test` in both the project root
+directory *and also in the demo directory*.
+
+
 ## Authors
 
 * Brian London <https://twitter.com/brianmlondon>
@@ -94,4 +121,5 @@ Thanks for assistance:
 
 Copyright (C) 2015 Oyster
 
-License goes here once released
+Licensed under the Apache 2.0 license. 
+http://www.apache.org/licenses/LICENSE-2.0

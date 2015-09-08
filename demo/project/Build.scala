@@ -1,6 +1,7 @@
+import com.oysterbooks.scavro.plugin.AvroCodegenPlugin
 import sbt._
 import sbt.Keys._
-import oyster.scavro.plugin.AvroCodegenPlugin.autoImport._
+import AvroCodegenPlugin.autoImport._
 
 
 object DemoBuild extends Build {
@@ -10,13 +11,17 @@ object DemoBuild extends Build {
     scalaVersion := "2.10.4",
     version := "0.0.2",
     libraryDependencies ++= Seq(
+      "com.oysterbooks" % "scavro_2.10_0.13" % "0.9.0-SNAPSHOT" from 
+        "https://oss.sonatype.org/content/repositories/snapshots/com/oysterbooks/scavro_2.10_0.13/0.9.0-SNAPSHOT/" + 
+          "scavro-0.9.0-SNAPSHOT.jar",
       "org.apache.avro" % "avro" % "1.7.7",
       "org.apache.avro" % "avro-tools" % "1.7.7",
       "org.scalatest" %% "scalatest" % "2.2.4" % "test"
     ),
     resolvers ++= Seq(
-      "Local Maven" at Path.userHome.asFile.toURI.toURL + ".ivy2/local",
-      Resolver.sonatypeRepo("releases")
+      // "Local Maven" at Path.userHome.asFile.toURI.toURL + ".ivy2/local",
+      Resolver.sonatypeRepo("releases"),
+      Resolver.sonatypeRepo("snapshots")
     ),
 
     // scavro plugin settings
@@ -24,14 +29,10 @@ object DemoBuild extends Build {
       (resourceDirectory in Compile).value / "item.avsc"
     ),
 
-    mainClass in (Compile, run) := Some("oyster.scavrodemo.ReadWriteDemo")
+    mainClass in (Compile, run) := Some("com.oysterbooks.scavrodemo.ReadWriteDemo")
   )
 
-  // TODO: Remove this and replace with maven libraryDependency once published
-  lazy val scavroProject = RootProject(file("../"))
-
   lazy val root = Project(id = "demo", base = file("."))
-    .dependsOn(scavroProject)
     .settings(demoSettings: _*)
     .settings(excludeFilter in unmanagedResources := "*.avsc")
 }

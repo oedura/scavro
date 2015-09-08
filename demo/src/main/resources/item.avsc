@@ -1,5 +1,5 @@
 {
-  "namespace": "oyster.scavrodemo.idl",
+  "namespace": "com.oysterbooks.scavrodemo.idl",
   "type": "record",
   "name": "LineItem",
   "fields": [
