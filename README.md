@@ -11,12 +11,13 @@ to automate Avro's Java code generation and use the default
 
 ## Scavro Plugin
 
-The Scavro Plugin is an SBT plugin that automates calling Avro's code 
+The Scavro Plugin is an SBT plugin that automates calling Avro's code
 generation.  To use, you must import the scavro library into your project's SBT
-settings by adding 
-`addSbtPlugin("com.oysterbooks" % "scavro_2.10" % "0.9.0-SNAPSHOT")` to your
-`plugins.sbt` file.   Avro schema and protocol files can then be added to your
-`Build.scala` or `build.sbt` file.
+settings by adding
+`addSbtPlugin("com.oysterbooks" % "scavro_2.10" % "0.9.0")` to your
+`plugins.sbt` file. Note that, whatever version of Scala you use in your
+project, SBT runs on 2.10.  Avro schema and protocol files can then be added to
+your `Build.scala` or `build.sbt` file.
 
 ```scala
 avroSchemaFiles := Seq(file("SchemaFile.avsc"))
@@ -87,10 +88,13 @@ functionality, and use both if you want both.
 
 ```scala
 libraryDependencies ++= Seq(
-      "com.oysterbooks" % "scavro_2.10_0.13" % "0.9.0-SNAPSHOT" from 
-        "https://oss.sonatype.org/content/repositories/snapshots/com/oysterbooks/" +
-          "scavro_2.10_0.13/0.9.0-SNAPSHOT/scavro-0.9.0-SNAPSHOT.jar")
+  "com.oysterbooks" % "scavro_2.10_0.13" % "0.9.0" from
+    "https://oss.sonatype.org/content/repositories/releases/com/oysterbooks/" +
+      "scavro_2.10_0.13/0.9.0/scavro-0.9.0.jar",
 ```
+
+The manual url specification is required because the runtime library and SBT
+plugin are distributed in a single package.  This may change in version 1.0.
 
 
 ## Contributing

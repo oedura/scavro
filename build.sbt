@@ -3,8 +3,10 @@ sbtPlugin := true
 // Metadata
 organization := "com.oysterbooks"
 name := "scavro"
-version := "0.9.0-SNAPSHOT"
+version := "0.9.0"
 scalaVersion := "2.10.4"
+description := "An SBT plugin for automatically calling Avro code generation " +
+  "and a thin scala wrapper for reading and writing Avro files"
 
 // Distribution
 licenses := Seq("Apache" -> url("http://www.apache.org/licenses/LICENSE-2.0"))
@@ -25,6 +27,7 @@ pomIncludeRepository := { _ => false }
 
 publishTo := {
   val nexus = "https://oss.sonatype.org/"
+  println("isSnapshot: " + isSnapshot.value)
   if (isSnapshot.value)
     Some("snapshots" at nexus + "content/repositories/snapshots")
   else
