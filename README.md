@@ -22,6 +22,7 @@ settings by adding
 avroSchemaFiles := Seq(file("SchemaFile.avsc"))
 avroProtocolFiles := Seq(file("ProtocolFile.avpr"))
 avroIDLFiles := Seq(file("AvroIdlFile.avdl"))
+avroDataFiles := Seq(file("AvroDataFile.avro"))
 ```
 
 Running `sbt compile` will then call the avro-tools compiler and generate java
