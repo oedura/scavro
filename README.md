@@ -34,6 +34,7 @@ writer described below.
 A complete demonstration project is available as a reference. 
 
     # cd demo
+    # sbt compile
     # sbt run
     [info] Running oyster.scavrodemo.ReadWriteDemo
     {"name": "Plywood table top", "price": 13.95, "quantity": 1}

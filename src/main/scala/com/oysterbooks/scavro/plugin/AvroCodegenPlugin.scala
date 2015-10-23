@@ -10,6 +10,7 @@ object AvroCodegenPlugin extends AutoPlugin {
     val avroSchemaFiles = settingKey[Seq[File]]("Avro schema files to compile")
     val avroProtocolFiles = settingKey[Seq[File]]("Avro Protocol files to compile")
     val avroIDLFiles = settingKey[Seq[File]]("Avro IDL files to compile")
+    val avroDataFiles = settingKey[Seq[File]]("Avro datafiles to compile")
 
     val showAvroCompilerOutput = settingKey[Boolean]("Hides messages from avro compiler")
 
@@ -21,12 +22,13 @@ object AvroCodegenPlugin extends AutoPlugin {
       avroSchemaFiles := Seq.empty[File],
       avroProtocolFiles := Seq.empty[File],
       avroIDLFiles := Seq.empty[File],
+      avroDataFiles := Seq.empty[File],
       showAvroCompilerOutput := false,
       avroCodeOutputDirectory := baseDirectory.value / "src" / "main" / "java",     
       avroCodegenTask := {
         println("running codegen")
         val compiler = AvroCodegen(avroCodeOutputDirectory.value, file("/tmp"), showAvroCompilerOutput.value)
-        compiler.run(avroIDLFiles.value, avroProtocolFiles.value, avroSchemaFiles.value)
+        compiler.run(avroIDLFiles.value, avroProtocolFiles.value, avroSchemaFiles.value, avroDataFiles.value)
         compiler.compileSchema(avroSchemaFiles.value)
       },
       compile <<= (compile in Compile) dependsOn avroCodegenTask

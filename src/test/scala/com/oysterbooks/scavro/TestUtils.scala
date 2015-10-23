@@ -1,10 +1,9 @@
 package com.oysterbooks.scavro
 
-import java.io.{FileOutputStream, InputStream}
+import java.io.{DataInputStream, FileOutputStream, InputStream}
 
 import sbt._
 
-import scala.io.Source
 import scala.util.Random
 
 class TestUtils(workingDir: File) {
@@ -16,9 +15,9 @@ class TestUtils(workingDir: File) {
 
   private def extractResource(resourceName: String): File = {
     val is: InputStream = getClass.getResourceAsStream(s"/$resourceName")
-    val text = Source.fromInputStream(is).mkString
+    val bytes = Stream.continually(is.read).takeWhile(_ != -1).map(_.toByte).toArray
     val os: FileOutputStream = new FileOutputStream(workingDir / "in" / resourceName)
-    os.write(text.getBytes)
+    os.write(bytes)
     os.close()
     is.close()
 
@@ -30,6 +29,7 @@ class TestUtils(workingDir: File) {
     schemaFile
     extractResource("NumberSystem.avdl")
   }
+  lazy val avroDataFile: File = extractResource("invoice.avro")
 
   def cleanup() = {
     def getRecursively(f: File): Seq[File] = f.listFiles.filter(_.isDirectory).flatMap(getRecursively) ++ f.listFiles

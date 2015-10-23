@@ -28,7 +28,7 @@ class AvroCodegenSpec extends FlatSpec {
   "AvroCodegen" should "compile a schema file" in {
     val tu = TestUtils(TestUtils.randomFile(file("/tmp"), "avro_codegen_test_"))
     val acg = AvroCodegen(tu.tmpDir / "out", tu.tmpDir / "tmp.avpr")
-    acg.run(Seq.empty[File], Seq.empty[File], Seq(tu.schemaFile))
+    acg.run(Seq.empty[File], Seq.empty[File], Seq(tu.schemaFile), Seq.empty[File])
     assert((tu.tmpDir / "out" / "Number.java").exists)
     tu.cleanup()
   }
@@ -36,10 +36,18 @@ class AvroCodegenSpec extends FlatSpec {
   it should "compile a protocol file" in {
     val tu = TestUtils(TestUtils.randomFile(file("/tmp"), "avro_codegen_test_"))
     val acg = AvroCodegen(tu.tmpDir / "out", tu.tmpDir)
-    acg.run(Seq(tu.protocolFile), Seq.empty[File], Seq.empty[File])
+    acg.run(Seq(tu.protocolFile), Seq.empty[File], Seq.empty[File], Seq.empty[File])
     assert((tu.tmpDir / "out" / "Number.java").exists)
     assert((tu.tmpDir / "out" / "NumberSystem.java").exists)
     assert((tu.tmpDir / "out" / "NumberSystemProtocol.java").exists)
+    tu.cleanup()
+  }
+
+  it should "compile a datafile" in {
+    val tu = TestUtils(TestUtils.randomFile(file("/tmp"), "avro_codegen_test_"))
+    val acg = AvroCodegen(tu.tmpDir / "out", tu.tmpDir )
+    acg.run(Seq.empty[File], Seq.empty[File], Seq.empty[File], Seq(tu.avroDataFile))
+    assert((tu.tmpDir / "out" / "com" / "oysterbooks" / "scavrodemo" /  "idl" / "LineItem.java").exists)
     tu.cleanup()
   }
 }
