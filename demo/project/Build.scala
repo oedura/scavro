@@ -9,7 +9,7 @@ object DemoBuild extends Build {
     // General settings
     organization := "oyster",
     scalaVersion := "2.10.4",
-    version := "0.0.2",
+    version := "0.0.3",
     libraryDependencies ++= Seq(
       "com.oysterbooks" % "scavro_2.10_0.13" % "0.9.0-SNAPSHOT" from 
         "https://oss.sonatype.org/content/repositories/snapshots/com/oysterbooks/scavro_2.10_0.13/0.9.0-SNAPSHOT/" + 
@@ -28,6 +28,8 @@ object DemoBuild extends Build {
     avroSchemaFiles := Seq(
       (resourceDirectory in Compile).value / "item.avsc"
     ),
+    scalaCustomTypes := Map("float"->"Double"),
+    scalaCustomNamespace := Map("com.oysterbooks.scavrodemo.idl"->"com.oysterbooks.scavrodemo.model"),
 
     mainClass in (Compile, run) := Some("com.oysterbooks.scavrodemo.ReadWriteDemo")
   )

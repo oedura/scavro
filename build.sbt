@@ -16,8 +16,7 @@ libraryDependencies ++= Seq(
   "org.apache.avro" % "avro" % "1.7.7",
   "org.apache.avro" % "avro-tools" % "1.7.7",
   "org.scalatest" %% "scalatest" % "2.2.4" % "test",
-  "com.eed3si9n" %% "treehugger" % "0.4.1",  // needed for scala codegen
-  "com.twitter" %% "util-eval" % "6.12.1"  // needed for testing codegen
+  "com.julianpeeters" %% "avrohugger-tools" % "0.6.0"  // needed for scala codegen
 )
 
 // Publication

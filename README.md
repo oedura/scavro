@@ -4,9 +4,7 @@ Scavro is an [SBT](http://www.scala-sbt.org/) plugin for automatically calling
 Avro code generation and a thin scala wrapper for reading and writing
 [Avro](http://avro.apache.org/) files.
 
-The two components can work fully independently, so one can use the SBT plugin
-to automate Avro's Java code generation and use the default
-`SpecificDatumWriter` API supplied by Avro.
+The two components can work fully independently, so one does not need to depend on the plugin after code has been generated.
 
 
 ## Scavro Plugin
@@ -25,12 +23,18 @@ avroIDLFiles := Seq(file("AvroIdlFile.avdl"))
 avroDataFiles := Seq(file("AvroDataFile.avro"))
 ```
 
-Running `sbt compile` will then call the avro-tools compiler and generate java
-files into the directory specified by the `avroCodeOutputDirectory` SBT key.
+Running `sbt compile` will then call the avro-tools and avrohugger-tools compilers, generating java files into the directory specified by the `avroCodeOutputDirectory` SBT key and scala files into the directory specified by the `scalaCodeOutputDirectory` SBT key.
 
-Typically, although by no means necessarily, one would write a scala case class 
-wrapper around the java class(es) generated in order to use the scala reader and
-writer described below.
+
+The generated scala wrapper classes cannot occupy the same namespace as their java counterparts, so by default they are generated in the `model` package, e.g. `package mynamespace.model`. Use the `scalaCustomNamespace` SBT key to override this setting with a custom namespace:
+
+
+```scala
+scalaCustomNamespace := Map("com.oysterbooks.scavrodemo.idl"->"com.oysterbooks.scavrodemo.model")
+
+```
+
+
 
 A complete demonstration project is available as a reference. 
 
@@ -52,24 +56,9 @@ A complete demonstration project is available as a reference.
 Scavro also provides a lightweight scala wrapper for Avro's read and write
 functionality through the `AvroReader` and `AvroWriter` classes.  They can be
 used to serialize or deserialize a `Seq` of objects that implements the
-`AvroSerializeable` trait.  Additionally, there must be an implicit instance of
-`AvroMetadata` to map the scala class to the code generated java class.  This
-requirement can be met by using `LineItem` from the demo project as a
-boilerplate template.
+`AvroSerializeable` trait.  For example, provided that LineItem.java and LineItem.scala have been generated, avro datafiles can be written and read with an `AvroWriter` and `AvroReader`:
 
 ```scala
-case class LineItem(name: String, price: Double, quantity: Int) 
-    extends AvroSerializeable {
-  // Additional boilerplate omited
-}
-
-object LineItem {
-  implicit def reader = new AvroReader[LineItem] { override type J = ... }
-  implicit val metadata: AvroMetadata[LineItem, JLineItem] = 
-    new AvroMetadata[LineItem, JLineItem] { ... }
-  }
-}
-
 dataToWrite: Seq[LineItem] = ...
 
 // Write an avro file

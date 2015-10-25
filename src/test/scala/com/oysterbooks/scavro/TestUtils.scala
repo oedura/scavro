@@ -25,6 +25,7 @@ class TestUtils(workingDir: File) {
   }
 
   lazy val schemaFile: File = extractResource("Number.avsc")
+  lazy val schemaWithNamespaceFile: File = extractResource("user.avsc")
   lazy val protocolFile: File = {
     schemaFile
     extractResource("NumberSystem.avdl")

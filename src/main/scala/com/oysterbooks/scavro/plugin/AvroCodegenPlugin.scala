@@ -15,6 +15,10 @@ object AvroCodegenPlugin extends AutoPlugin {
     val showAvroCompilerOutput = settingKey[Boolean]("Hides messages from avro compiler")
 
     val avroCodeOutputDirectory = settingKey[File]("Location where generated Java code will be placed")
+    val scalaCodeOutputDirectory = settingKey[File]("Location where generated Scala wrapper code will be placed")
+
+    val scalaCustomTypes = settingKey[Map[String, String]]("Customize Avro to Scala type map by type")
+    val scalaCustomNamespace = settingKey[Map[String, String]]("Custom namespace of generated Scala wrapper code")
 
     val avroCodegenTask = taskKey[Unit]("Compiles AVRO files")
 
@@ -24,12 +28,21 @@ object AvroCodegenPlugin extends AutoPlugin {
       avroIDLFiles := Seq.empty[File],
       avroDataFiles := Seq.empty[File],
       showAvroCompilerOutput := false,
-      avroCodeOutputDirectory := baseDirectory.value / "src" / "main" / "java",     
+      avroCodeOutputDirectory := baseDirectory.value / "src" / "main" / "java",
+      scalaCodeOutputDirectory := baseDirectory.value / "src" / "main" / "scala",
+      scalaCustomTypes := Map.empty[String, String],
+      scalaCustomNamespace := Map.empty[String, String],  
       avroCodegenTask := {
         println("running codegen")
         val compiler = AvroCodegen(avroCodeOutputDirectory.value, file("/tmp"), showAvroCompilerOutput.value)
         compiler.run(avroIDLFiles.value, avroProtocolFiles.value, avroSchemaFiles.value, avroDataFiles.value)
         compiler.compileSchema(avroSchemaFiles.value)
+        val generator = ScalaCodegen(scalaCodeOutputDirectory.value, 
+          file("/tmp"), 
+          showAvroCompilerOutput.value,
+          scalaCustomTypes.value,
+          scalaCustomNamespace.value)
+        generator.run(avroIDLFiles.value, avroProtocolFiles.value, avroSchemaFiles.value, avroDataFiles.value)
       },
       compile <<= (compile in Compile) dependsOn avroCodegenTask
     )
