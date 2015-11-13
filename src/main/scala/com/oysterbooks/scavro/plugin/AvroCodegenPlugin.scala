@@ -27,7 +27,6 @@ object AvroCodegenPlugin extends AutoPlugin {
         println("running codegen")
         val compiler = AvroCodegen(avroCodeOutputDirectory.value, file("/tmp"), showAvroCompilerOutput.value)
         compiler.run(avroIDLFiles.value, avroProtocolFiles.value, avroSchemaFiles.value)
-        compiler.compileSchema(avroSchemaFiles.value)
       },
       compile <<= (compile in Compile) dependsOn avroCodegenTask
     )
