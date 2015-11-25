@@ -1,8 +1,7 @@
-package com.oysterbooks.scavrodemo
+package org.oedura.scavrodemo
 
-import com.oysterbooks.scavro.{AvroReader, AvroWriter}
-import com.oysterbooks.scavro.AvroReader
-import com.oysterbooks.scavrodemo.model.LineItem
+import org.oedura.scavro.{AvroReader, AvroWriter}
+import org.oedura.scavrodemo.model.LineItem
 
 
 object ReadWriteDemo extends App {

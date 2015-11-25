@@ -1,8 +1,9 @@
-package com.oysterbooks.scavrodemo.model
+package org.oedura.scavrodemo.model
 
-import com.oysterbooks.scavro.{AvroReader, AvroSerializeable, AvroMetadata}
 import org.apache.avro.Schema
-import com.oysterbooks.scavrodemo.idl.{LineItem => JLineItem}
+
+import org.oedura.scavro.{AvroReader, AvroSerializeable, AvroMetadata}
+import org.oedura.scavrodemo.idl.{LineItem => JLineItem}
 
 
 case class LineItem(name: String, price: Double, quantity: Int) extends AvroSerializeable {

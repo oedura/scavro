@@ -1,7 +1,7 @@
 sbtPlugin := true
 
 // Metadata
-organization := "com.oysterbooks"
+organization := "org.oedura"
 name := "scavro"
 version := "0.9.1-SNAPSHOT"
 scalaVersion := "2.10.4"
@@ -29,9 +29,10 @@ publishTo := {
   val nexus = "https://oss.sonatype.org/"
   println("isSnapshot: " + isSnapshot.value)
   if (isSnapshot.value)
-    Some("snapshots" at nexus + "content/repositories/snapshots")
+    Some("Local Maven" at Path.userHome.asFile.toURI.toURL + ".ivy2/local")
+//    Some("snapshots" at nexus + "content/repositories/snapshots")
   else
-    Some("releases"  at nexus + "service/local/staging/deploy/maven2")
+    Some("releases" at nexus + "service/local/staging/deploy/maven2")
 }
 
 pomExtra := {

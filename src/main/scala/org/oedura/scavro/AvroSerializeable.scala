@@ -1,4 +1,4 @@
-package com.oysterbooks.scavro
+package org.oedura.scavro
 
 import org.apache.avro.specific.SpecificRecordBase
 
