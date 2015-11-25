@@ -1,4 +1,4 @@
-package com.oysterbooks.scavro.plugin
+package org.oedura.scavro.plugin
 
 import java.io.PrintStream
 

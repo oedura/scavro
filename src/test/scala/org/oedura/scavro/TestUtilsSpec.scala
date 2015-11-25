@@ -1,6 +1,6 @@
-package com.oysterbooks.scavro
+package org.oedura.scavro
 
-import com.oysterbooks.scavro.plugin.NullOutputStream
+import org.oedura.scavro.plugin.NullOutputStream
 import org.scalatest._
 import sbt.file
 

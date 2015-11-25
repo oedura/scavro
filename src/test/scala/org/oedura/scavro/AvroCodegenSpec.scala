@@ -1,6 +1,6 @@
-package com.oysterbooks.scavro
+package org.oedura.scavro
 
-import com.oysterbooks.scavro.plugin.AvroCodegen
+import org.oedura.scavro.plugin.AvroCodegen
 import org.scalatest._
 
 import sbt._
