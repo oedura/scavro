@@ -18,7 +18,9 @@ object DemoBuild extends Build {
       "org.scalatest" %% "scalatest" % "2.2.4" % "test"
     ),
 
-    unmanagedJars in Compile += file("/Users/brian/.ivy2/local/org/oedura/scavro_2.10_0.13/0.9.1-SNAPSHOT/scavro-0.9.1-SNAPSHOT.jar"),
+    unmanagedJars in Compile += file( Path.userHome.asFile.toURI.toURL +
+      ".ivy2/local/org/oedura/scavro_2.10_0.13/0.9.1-SNAPSHOT/scavro-0.9.1-SNAPSHOT.jar"
+    ),
 
     resolvers ++= Seq(
        "Local Maven" at Path.userHome.asFile.toURI.toURL + ".ivy2/local",
