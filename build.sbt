@@ -10,7 +10,7 @@ description := "An SBT plugin for automatically calling Avro code generation " +
 
 // Distribution
 licenses := Seq("Apache" -> url("http://www.apache.org/licenses/LICENSE-2.0"))
-homepage := Some(url("https://github.com/oysterbooks/scavro"))
+homepage := Some(url("https://github.com/oedura/scavro"))
 
 // Dependencies
 resolvers += Resolver.sonatypeRepo("public")
@@ -29,16 +29,15 @@ publishTo := {
   val nexus = "https://oss.sonatype.org/"
   println("isSnapshot: " + isSnapshot.value)
   if (isSnapshot.value)
-    Some("Local Maven" at Path.userHome.asFile.toURI.toURL + ".ivy2/local")
-//    Some("snapshots" at nexus + "content/repositories/snapshots")
+    Some("snapshots" at nexus + "content/repositories/snapshots")
   else
     Some("releases" at nexus + "service/local/staging/deploy/maven2")
 }
 
 pomExtra := {
   <scm>
-    <url>git@github.com:oysterbooks/scavro.git</url>
-    <connection>scm:git@github.com:oysterbooks/scavro.git</connection>
+    <url>git@github.com:oedura/scavro.git</url>
+    <connection>scm:git@github.com:oedura/scavro.git</connection>
   </scm>
   <developers>
     <developer>
