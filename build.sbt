@@ -3,7 +3,7 @@ sbtPlugin := true
 // Metadata
 organization := "org.oedura"
 name := "scavro"
-version := "0.9.1-SNAPSHOT"
+version := "0.9.1"
 scalaVersion := "2.10.4"
 description := "An SBT plugin for automatically calling Avro code generation " +
   "and a thin scala wrapper for reading and writing Avro files"

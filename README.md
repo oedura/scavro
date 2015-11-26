@@ -88,9 +88,9 @@ functionality, and use both if you want both.
 
 ```scala
 libraryDependencies ++= Seq(
-  "org.oedura" % "scavro_2.10_0.13" % "0.9.0" from
+  "org.oedura" % "scavro_2.10_0.13" % "0.9.1" from
     "https://oss.sonatype.org/content/repositories/releases/org/oedura/" +
-      "scavro_2.10_0.13/0.9.0/scavro-0.9.0.jar",
+      "scavro_2.10_0.13/0.9.1/scavro-0.9.1.jar",
 ```
 
 The manual url specification is required because the runtime library and SBT
