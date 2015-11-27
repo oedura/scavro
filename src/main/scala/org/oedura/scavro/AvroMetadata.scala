@@ -16,7 +16,9 @@ import org.apache.avro.Schema
   * @tparam J  Java class from Avro code generation
   */
 trait AvroMetadata[S, J] {
+  /** Java class into which the corresponding Scala class maps */
   val avroClass: Class[J]
+  /** Avro `Schema` instance typically provided by the avro-tools generated java class */
   val schema: Schema
   /** Function that can produce an instance of type `S` from an instance of type `J` */
   val fromAvro: (J) => S

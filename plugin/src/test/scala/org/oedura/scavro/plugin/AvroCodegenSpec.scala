@@ -29,7 +29,7 @@ class AvroCodegenSpec extends FlatSpec {
     val acg = AvroCodegen(tu.tmpDir / "out", tu.tmpDir / "tmp.avpr")
     acg.run(Seq.empty[File], Seq.empty[File], Seq(tu.schemaFile))
     assert((tu.tmpDir / "out" / "Number.java").exists)
-    tu.cleanup()
+//    tu.cleanup()
   }
 
   it should "compile a protocol file" in {
