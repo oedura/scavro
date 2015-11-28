@@ -1,6 +1,5 @@
 logLevel := Level.Warn
 
-//resolvers += "Local Maven" at Path.userHome.asFile.toURI.toURL + ".ivy2/local"
-//resolvers += Resolver.sonatypeRepo("snapshots")
+resolvers += Resolver.sonatypeRepo("releases")
 
-addSbtPlugin("org.oedura" % "scavro" % "0.9.1")
+addSbtPlugin("org.oedura" % "scavro-plugin" % "1.0.0")

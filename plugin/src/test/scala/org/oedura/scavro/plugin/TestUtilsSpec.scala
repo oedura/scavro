@@ -1,4 +1,4 @@
-package org.oedura.scavro
+package org.oedura.scavro.plugin
 
 import org.oedura.scavro.plugin.NullOutputStream
 import org.scalatest._

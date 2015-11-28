@@ -3,7 +3,7 @@ package org.oedura.scavro
 import java.io._
 
 import org.apache.avro.file.{ DataFileReader, SeekableFileInput, SeekableInput }
-import org.apache.avro.specific.{ SpecificDatumReader, SpecificRecordBase }
+import org.apache.avro.specific.SpecificDatumReader
 
 
 /**

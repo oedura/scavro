@@ -14,7 +14,7 @@ to automate Avro's Java code generation and use the default
 The Scavro Plugin is an SBT plugin that automates calling Avro's code
 generation.  To use, you must import the scavro library into your project's SBT
 settings by adding
-`addSbtPlugin("org.oedura" % "scavro_2.10" % "0.9.1")` to your
+`addSbtPlugin("org.oedura" % "scavro-plugin" % "1.0.0")` to your
 `plugins.sbt` file. Note that, whatever version of Scala you use in your
 project, SBT runs on 2.10.  Avro schema and protocol files can then be added to
 your `Build.scala` or `build.sbt` file.
@@ -88,9 +88,8 @@ functionality, and use both if you want both.
 
 ```scala
 libraryDependencies ++= Seq(
-  "org.oedura" % "scavro_2.10_0.13" % "0.9.1" from
-    "https://oss.sonatype.org/content/repositories/releases/org/oedura/" +
-      "scavro_2.10_0.13/0.9.1/scavro-0.9.1.jar",
+  "org.oedura" %% "scavro" % "1.0.0"
+)
 ```
 
 The manual url specification is required because the runtime library and SBT

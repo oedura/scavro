@@ -1,6 +1,5 @@
-package org.oedura.scavro
+package org.oedura.scavro.plugin
 
-import org.oedura.scavro.plugin.AvroCodegen
 import org.scalatest._
 
 import sbt._
@@ -30,7 +29,7 @@ class AvroCodegenSpec extends FlatSpec {
     val acg = AvroCodegen(tu.tmpDir / "out", tu.tmpDir / "tmp.avpr")
     acg.run(Seq.empty[File], Seq.empty[File], Seq(tu.schemaFile))
     assert((tu.tmpDir / "out" / "Number.java").exists)
-    tu.cleanup()
+//    tu.cleanup()
   }
 
   it should "compile a protocol file" in {
