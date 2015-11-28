@@ -1,4 +1,4 @@
-package org.oedura.scavro
+package org.oedura.scavro.plugin
 
 import java.io.{FileOutputStream, InputStream}
 
