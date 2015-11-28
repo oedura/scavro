@@ -25,7 +25,7 @@ public class MockNumber extends SpecificRecordBase implements SpecificRecord {
     public static final org.apache.avro.Schema SCHEMA$ = new Schema.Parser().parse(
         "{\n" +
         "  \"type\": \"record\",\n" +
-        "  \"name\": \"Number\",\n" +
+        "  \"name\": \"MockNumber\",\n" +
         "  \"fields\": [\n" +
         "    {\n" +
         "      \"name\": \"name\",\n" +
