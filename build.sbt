@@ -1,7 +1,7 @@
 // Metadata
 organization := "org.oedura"
 name := "scavro"
-version := "0.9.3-SNAPSHOT"
+version := "1.0.0"
 scalaVersion := "2.10.4"
 description := "A thin scala wrapper for reading and writing Avro files"
 
