@@ -1,13 +1,18 @@
 // Metadata
 organization := "org.oedura"
 name := "scavro"
-version := "1.0.0"
+version := "1.0.1-SNAPSHOT"
 scalaVersion := "2.10.4"
+crossScalaVersions := Seq("2.10.6", "2.11.4")
 description := "A thin scala wrapper for reading and writing Avro files"
 
 // Distribution
 licenses := Seq("Apache" -> url("http://www.apache.org/licenses/LICENSE-2.0"))
 homepage := Some(url("https://github.com/oedura/scavro"))
+
+// Compiler Settings
+javacOptions ++= Seq("-source", "1.7", "-target", "1.7")
+scalacOptions += "-target:jvm-1.7"
 
 // Dependencies
 resolvers += Resolver.sonatypeRepo("public")
