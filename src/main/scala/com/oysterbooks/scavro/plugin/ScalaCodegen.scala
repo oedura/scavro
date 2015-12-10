@@ -14,9 +14,9 @@ import scala.collection.JavaConversions._
 class ScalaCodegen(outputDir: File, 
   tmpDir: File, 
   verbose: Boolean, 
-  scalaCustomTypes: Map[String, String] = Map.empty,
-  scalaCustomNamespace: Map[String, String] = Map.empty) {
-  val generatorTool = new GeneratorTool(Scavro, scalaCustomTypes, scalaCustomNamespace)
+  avroScalaCustomTypes: Map[String, Class[_]] = Map.empty,
+  avroScalaCustomNamespace: Map[String, String] = Map.empty) {
+  val generatorTool = new GeneratorTool(Scavro, avroScalaCustomTypes, avroScalaCustomNamespace)
   val idlTool = new IdlTool()
 
   val outputPath = outputDir.getAbsolutePath
@@ -86,9 +86,9 @@ object ScalaCodegen {
   def apply(outputDir: File, 
     tmpDir: File, 
     verbose: Boolean = false,
-    scalaCustomTypes: Map[String, String] = Map.empty,
-    scalaCustomNamespace: Map[String, String] = Map.empty) = {
-    new ScalaCodegen(outputDir, tmpDir, verbose, scalaCustomTypes, scalaCustomNamespace)
+    avroScalaCustomTypes: Map[String, Class[_]] = Map.empty,
+    avroScalaCustomNamespace: Map[String, String] = Map.empty) = {
+    new ScalaCodegen(outputDir, tmpDir, verbose, avroScalaCustomTypes, avroScalaCustomNamespace)
   }
 }
 

@@ -28,8 +28,8 @@ object DemoBuild extends Build {
     avroSchemaFiles := Seq(
       (resourceDirectory in Compile).value / "item.avsc"
     ),
-    scalaCustomTypes := Map("float"->"Double"),
-    scalaCustomNamespace := Map("com.oysterbooks.scavrodemo.idl"->"com.oysterbooks.scavrodemo.model"),
+    avroScalaCustomTypes := Map("float"->classOf[Double]),
+    avroScalaCustomNamespace := Map("com.oysterbooks.scavrodemo.idl"->"com.oysterbooks.scavrodemo.model"),
 
     mainClass in (Compile, run) := Some("com.oysterbooks.scavrodemo.ReadWriteDemo")
   )
