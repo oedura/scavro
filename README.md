@@ -123,6 +123,7 @@ directory *and also in the demo directory*.
 ## Authors
 
 * Brian London <https://twitter.com/brianmlondon>
+* Julian Peeters <https://twitter.com/julianpeeters>
 
 Thanks for assistance:
 
