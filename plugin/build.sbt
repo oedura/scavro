@@ -5,6 +5,8 @@ organization := "org.oedura"
 name := "scavro-plugin"
 version := "1.0.1-SNAPSHOT"
 scalaVersion := "2.10.4"
+javacOptions ++= Seq("-source", "1.7", "-target", "1.7")
+scalacOptions += "-target:jvm-1.7"
 description := "An SBT plugin for automatically calling Avro code generation"
 
 // Distribution
