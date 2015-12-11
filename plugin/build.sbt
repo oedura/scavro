@@ -3,13 +3,17 @@ sbtPlugin := true
 // Metadata
 organization := "org.oedura"
 name := "scavro-plugin"
-version := "1.0.0"
+version := "1.0.1"
 scalaVersion := "2.10.4"
 description := "An SBT plugin for automatically calling Avro code generation"
 
 // Distribution
 licenses := Seq("Apache" -> url("http://www.apache.org/licenses/LICENSE-2.0"))
 homepage := Some(url("https://github.com/oedura/scavro"))
+
+// Compiler Settings
+javacOptions ++= Seq("-source", "1.7", "-target", "1.7")
+scalacOptions += "-target:jvm-1.7"
 
 // Dependencies
 resolvers += Resolver.sonatypeRepo("public")
