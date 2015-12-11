@@ -12,7 +12,7 @@ object DemoBuild extends Build {
     version := "1.0.1",
     scalaVersion := "2.10.4",
     libraryDependencies ++= Seq(
-      "org.oedura" %% "scavro" % "1.0.0",
+      "org.oedura" %% "scavro" % "1.0.1",
       "org.apache.avro" % "avro" % "1.7.7",
       "org.apache.avro" % "avro-tools" % "1.7.7",
       "org.scalatest" %% "scalatest" % "2.2.4" % "test"
