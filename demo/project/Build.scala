@@ -9,7 +9,7 @@ object DemoBuild extends Build {
     // General settings
     organization := "org.oedura",
     name := "scavrodemo",
-    version := "1.0.0",
+    version := "1.0.1",
     scalaVersion := "2.10.4",
     libraryDependencies ++= Seq(
       "org.oedura" %% "scavro" % "1.0.0",
