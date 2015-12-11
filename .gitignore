@@ -4,3 +4,4 @@ protject/project/
 project/target/
 demo/src/main/java/
 demo/invoice.avro
+.DS_Store
