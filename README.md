@@ -4,16 +4,17 @@ Scavro is an [SBT](http://www.scala-sbt.org/) plugin for automatically calling
 Avro code generation and a thin scala wrapper for reading and writing
 [Avro](http://avro.apache.org/) files.
 
-The two components can work fully independently, so one does not need to depend on the plugin after code has been generated.
+The two components can work fully independently, so one does not need to depend
+on the plugin after code has been generated.
 
 
 ## Scavro Plugin
 
 ##### Setup
 
-The Scavro Plugin is an SBT plugin that automates calling Avro code 
+The Scavro Plugin is an SBT plugin that automates calling Avro code
 generation.  To use, you must import the scavro library into your project's SBT
-settings by adding 
+settings by adding
 `addSbtPlugin("com.oysterbooks" % "scavro_2.10" % "0.9.0-SNAPSHOT")` to your
 `plugins.sbt` file.   Avro schema and protocol files can then be added to your
 `Build.scala` or `build.sbt` file.
@@ -27,16 +28,16 @@ avroDataFiles := Seq(file("AvroDataFile.avro"))
 
 ##### Generating Code
 
-Running `sbt compile` will then call the avro-tools and avrohugger-tools 
-compilers, generating java files into the directory specified by the 
-`avroCodeOutputDirectory` SBT key and scala files into the directory specified 
+Running `sbt compile` will then call the avro-tools and avrohugger-tools
+compilers, generating java files into the directory specified by the
+`avroCodeOutputDirectory` SBT key and scala files into the directory specified
 by the `avroScalaCodeOutputDirectory` SBT key.
 
 
 ##### Namespaces
 
-The generated scala wrapper classes cannot occupy the same namespace as their 
-java counterparts, so  Use the `avroScalaCustomNamespace` SBT key to 
+The generated scala wrapper classes cannot occupy the same namespace as their
+java counterparts, so  Use the `avroScalaCustomNamespace` SBT key to
 override this setting with a custom namespace:
 
 
@@ -48,8 +49,9 @@ avroScalaCustomNamespace := Map("com.oysterbooks.scavrodemo.idl"->"com.oysterboo
 
 #### Scala Types
 
-Currently all avro types are supported except the following: `fixed`, `bytes`. 
-`array` and number types can be remapped using the `avroScalaCustomTypes` SBT key:
+Currently all avro types are supported except the following: `fixed`, `bytes`.
+`array` and number types can be remapped using the `avroScalaCustomTypes` SBT
+key:
 
 
 ```scala
@@ -59,7 +61,7 @@ avroScalaCustomTypes := Map("array"->classOf[Seq[_]])
 
 ##### Demo
 
-A complete demonstration project is available as a reference. 
+A complete demonstration project is available as a reference.
 
     # cd demo
     # sbt compile
@@ -79,8 +81,8 @@ A complete demonstration project is available as a reference.
 Scavro also provides a lightweight scala wrapper for Avro's read and write
 functionality through the `AvroReader` and `AvroWriter` classes.  They can be
 used to serialize or deserialize a `Seq` of objects that implements the
-`AvroSerializeable` trait.  For example, provided that `LineItem.java` and 
-`LineItem.scala` have been generated, avro datafiles can be written and read 
+`AvroSerializeable` trait.  For example, provided that `LineItem.java` and
+`LineItem.scala` have been generated, avro datafiles can be written and read
 with an `AvroWriter` and `AvroReader`:
 
 ```scala
@@ -103,7 +105,7 @@ functionality, and use both if you want both.
 
 ```scala
 libraryDependencies ++= Seq(
-      "com.oysterbooks" % "scavro_2.10_0.13" % "0.9.0-SNAPSHOT" from 
+      "com.oysterbooks" % "scavro_2.10_0.13" % "0.9.0-SNAPSHOT" from
         "https://oss.sonatype.org/content/repositories/snapshots/com/oysterbooks/" +
           "scavro_2.10_0.13/0.9.0-SNAPSHOT/scavro-0.9.0-SNAPSHOT.jar")
 ```
@@ -111,8 +113,8 @@ libraryDependencies ++= Seq(
 
 ## Contributing
 
-Contributions are welcome.  Submit pull requests to the master branch for core 
-improvements and bug fixes.  If you feel more ambitious, check out the 
+Contributions are welcome.  Submit pull requests to the master branch for core
+improvements and bug fixes.  If you feel more ambitious, check out the
 `code_generation` feature branch.
 
 The demo project is considered an integration test and must run correctly before
@@ -138,5 +140,5 @@ Thanks for assistance:
 
 Copyright (C) 2015 Oyster
 
-Licensed under the Apache 2.0 license. 
+Licensed under the Apache 2.0 license.
 http://www.apache.org/licenses/LICENSE-2.0
