@@ -10,7 +10,7 @@ object DemoBuild extends Build {
     organization := "org.oedura",
     name := "scavrodemo",
     version := "1.0.1",
-    scalaVersion := "2.10.4",
+    scalaVersion := "2.11.8",
     libraryDependencies ++= Seq(
       "org.oedura" %% "scavro" % "1.0.1",
       "org.apache.avro" % "avro" % "1.7.7",
@@ -19,7 +19,7 @@ object DemoBuild extends Build {
     ),
 
     resolvers ++= Seq(
-      //       "Local Maven" at Path.userHome.asFile.toURI.toURL + ".ivy2/local",
+      // "Local Maven" at Path.userHome.asFile.toURI.toURL + ".ivy2/local"
       Resolver.sonatypeRepo("releases"),
       Resolver.sonatypeRepo("snapshots")
     ),
