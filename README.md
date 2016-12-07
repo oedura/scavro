@@ -16,7 +16,7 @@ generation.  To use, you must import the scavro library into your project's SBT
 settings by adding the following line to your `plugins.sbt` file:
 
 ```scala
-addSbtPlugin("org.oedura" % "scavro-plugin" % "1.0.1")
+addSbtPlugin("org.oedura" % "scavro-plugin" % "1.0.2")
 ```
 
 Note that, whatever version of Scala you use in your
@@ -34,11 +34,11 @@ avroIDLFiles := Seq(file("AvroIdlFile.avdl"))
 Running `sbt compile` will then call the avro-tools compiler and generate java
 files into the directory specified by the `avroCodeOutputDirectory` SBT key.
 
-Typically, although by no means necessarily, one would write a scala case class 
+Typically, although by no means necessarily, one would write a scala case class
 wrapper around the java class(es) generated in order to use the scala reader and
 writer described below.
 
-A complete demonstration project is available as a reference. 
+A complete demonstration project is available as a reference.
 
     # cd demo
     # sbt run
@@ -63,14 +63,14 @@ requirement can be met by using `LineItem` from the demo project as a
 boilerplate template.
 
 ```scala
-case class LineItem(name: String, price: Double, quantity: Int) 
+case class LineItem(name: String, price: Double, quantity: Int)
     extends AvroSerializeable {
   // Additional boilerplate omited
 }
 
 object LineItem {
   implicit def reader = new AvroReader[LineItem] { override type J = ... }
-  implicit val metadata: AvroMetadata[LineItem, JLineItem] = 
+  implicit val metadata: AvroMetadata[LineItem, JLineItem] =
     new AvroMetadata[LineItem, JLineItem] { ... }
   }
 }
@@ -104,8 +104,8 @@ plugin are distributed in a single package.  This may change in version 1.0.
 
 ## Contributing
 
-Contributions are welcome.  Submit pull requests to the master branch for core 
-improvements and bug fixes.  If you feel more ambitious, check out the 
+Contributions are welcome.  Submit pull requests to the master branch for core
+improvements and bug fixes.  If you feel more ambitious, check out the
 `code_generation` feature branch.
 
 The demo project is considered an integration test and must run correctly before
@@ -130,5 +130,5 @@ Thanks for assistance:
 
 Copyright (C) 2015 Oyster and individual contributors
 
-Licensed under the Apache 2.0 license. 
+Licensed under the Apache 2.0 license.
 http://www.apache.org/licenses/LICENSE-2.0

@@ -1,7 +1,7 @@
 // Metadata
 organization := "org.oedura"
 name := "scavro"
-version := "1.0.1"
+version := "1.0.2"
 scalaVersion := "2.10.4"
 crossScalaVersions := Seq("2.10.6", "2.11.8")
 description := "A thin scala wrapper for reading and writing Avro files"
