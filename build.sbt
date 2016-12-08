@@ -1,9 +1,9 @@
 // Metadata
 organization := "org.oedura"
 name := "scavro"
-version := "1.0.1"
+version := "1.0.2"
 scalaVersion := "2.10.4"
-crossScalaVersions := Seq("2.10.6", "2.11.4")
+crossScalaVersions := Seq("2.10.6", "2.11.8")
 description := "A thin scala wrapper for reading and writing Avro files"
 
 // Distribution
@@ -17,7 +17,7 @@ scalacOptions += "-target:jvm-1.7"
 // Dependencies
 resolvers += Resolver.sonatypeRepo("public")
 libraryDependencies ++= Seq(
-  "org.apache.avro" % "avro" % "1.7.7",
+  "org.apache.avro" % "avro" % "1.8.1",
   "org.scalatest" %% "scalatest" % "2.2.4" % "test"
 )
 
