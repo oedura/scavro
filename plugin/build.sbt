@@ -3,7 +3,7 @@ sbtPlugin := true
 // Metadata
 organization := "org.oedura"
 name := "scavro-plugin"
-version := "1.0.2"
+version := "1.0.3"
 scalaVersion := "2.10.4"
 description := "An SBT plugin for automatically calling Avro code generation"
 
@@ -20,7 +20,7 @@ resolvers += Resolver.sonatypeRepo("public")
 libraryDependencies ++= Seq(
   "org.apache.avro" % "avro" % "1.8.1",
   "org.apache.avro" % "avro-tools" % "1.8.1",
-  "org.scalatest" %% "scalatest" % "2.2.4" % "test"
+  "org.scalatest" %% "scalatest" % "3.0.5" % "test"
 )
 
 // Publication
