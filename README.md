@@ -16,7 +16,7 @@ generation.  To use, you must import the scavro library into your project's SBT
 settings by adding the following line to your `plugins.sbt` file:
 
 ```scala
-addSbtPlugin("org.oedura" % "scavro-plugin" % "1.0.2")
+addSbtPlugin("org.oedura" % "scavro-plugin" % "1.0.3")
 ```
 
 Note that, whatever version of Scala you use in your
@@ -94,7 +94,7 @@ functionality, and use both if you want both.
 
 ```scala
 libraryDependencies ++= Seq(
-  "org.oedura" %% "scavro" % "1.0.1"
+  "org.oedura" %% "scavro" % "1.0.3"
 )
 ```
 

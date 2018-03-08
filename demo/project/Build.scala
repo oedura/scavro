@@ -9,13 +9,13 @@ object DemoBuild extends Build {
     // General settings
     organization := "org.oedura",
     name := "scavrodemo",
-    version := "1.0.2",
+    version := "1.0.3",
     scalaVersion := "2.11.8",
     libraryDependencies ++= Seq(
-      "org.oedura" %% "scavro" % "1.0.2",
+      "org.oedura" %% "scavro" % "1.0.3",
       "org.apache.avro" % "avro" % "1.8.1",
       "org.apache.avro" % "avro-tools" % "1.8.1",
-      "org.scalatest" %% "scalatest" % "2.2.4" % "test"
+      "org.scalatest" %% "scalatest" % "3.0.5" % "test"
     ),
 
     resolvers ++= Seq(
